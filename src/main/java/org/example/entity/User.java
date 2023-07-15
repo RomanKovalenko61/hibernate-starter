@@ -5,8 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDate;
+import org.example.converter.BirthdayConverter;
 
 @Data
 @NoArgsConstructor
@@ -19,14 +18,18 @@ public class User {
     @Id
     @Column(name = "username")
     private String username;
+
     @Column(name = "firstname")
     private String firstname;
+
     @Column(name = "lastname")
     private String lastname;
+
+    @Convert(converter = BirthdayConverter.class)
     @Column(name = "birth_date")
-    private LocalDate birthDate;
-    @Column(name = "age")
-    private Integer age;
+    private Birthday birthDate;
+
     @Enumerated(EnumType.STRING)
+    @Column(name = "role")
     private Role role;
 }

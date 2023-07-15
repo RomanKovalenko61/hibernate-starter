@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.Arrays;
 
 import static java.util.Optional.ofNullable;
@@ -17,13 +16,7 @@ class HibernateRunnerTest {
 
     @Test
     void checkReflectionApi() throws SQLException, IllegalAccessException {
-        User user = User.builder()
-                .username("ivan@gmail.com")
-                .firstname("Ivan")
-                .lastname("Ivanov")
-                .birthDate(LocalDate.of(2000, 1, 19))
-                .age(20)
-                .build();
+        User user = User.builder().build();
 
         String sql = """
                 insert
