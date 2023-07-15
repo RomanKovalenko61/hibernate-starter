@@ -2,7 +2,8 @@
 
 java-version: 17
 
-hibernate-version: 6.2.6 Final
+hibernate-version: 5.5.6 Final
+В 6 версии есть deprecated аннотации, используемые в коде!
 
 gradle-version: 8.2.1  
 

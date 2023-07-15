@@ -1,10 +1,10 @@
 package org.example;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Table;
 import org.example.entity.User;
 import org.junit.jupiter.api.Test;
 
+import javax.persistence.Column;
+import javax.persistence.Table;
 import java.lang.reflect.Field;
 import java.sql.SQLException;
 import java.util.Arrays;
