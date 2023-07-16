@@ -42,3 +42,14 @@ Entity lifecycle: transient, persistent, detached, removed.
 
 session.refresh(entity) -> синх. состояние entity с базой данных (поместить в persistenceContext если entity не было)
 session.merge(entity) -> сохр. измененное состояние entity в базу данных (поместить в persistenceContext если entity не было)
+
+------------------------------------------------
+
+
+> Java Persistence API (JPA) - спецификация Java, которая представляет набор интерфейсов/аннотаций
+> для возможности сохранять в удобном виде Java объекты в базу данных и наоборот извлекать информацию
+> из баз данных в виде Java объектов (ORM)
+>
+> Hibernate (ORM framefork) - одна за самых распространенных JPA реализаций.
+
+См. find <-> get  OR save <-> persist
