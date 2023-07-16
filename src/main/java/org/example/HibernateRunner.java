@@ -1,14 +1,10 @@
 package org.example;
 
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
-import org.example.entity.Birthday;
-import org.example.entity.Role;
 import org.example.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-
-import java.time.LocalDate;
 
 public class HibernateRunner {
     public static void main(String[] args) {
@@ -39,7 +35,14 @@ public class HibernateRunner {
 //            session.save(user);
 //            session.saveOrUpdate(user);
 //            session.delete(user);
-            User user = session.get(User.class, "ivan@gmail.com");
+            User user1 = session.get(User.class, "ivan@gmail.com");
+//            User user2 = session.get(User.class, "ivan@gmail.com");
+            user1.setLastname("Petrov");
+
+            System.out.println(session.isDirty());
+//            //operation with cache first level
+//            session.evict(user1); // delete user from hashmap entitiesByKey
+//            session.clear(); //clear hashmap entitiesByKey
 
             session.getTransaction().commit();
         }

@@ -24,3 +24,11 @@ interface EntityPersister -> mapped sql query with ours entity.
 2. see field entityPersisterMap (keeps all ours entity) key -> entity value -> SingleTableEntityPersister
 3. see field typeConfiguration (keeps all ours types: basic and added: 
 for example configuration.registerTypeOverride(new JsonBinaryType());
+
+----------------------------------------
+field persistenceContext into session -> first level cache for each session
+    внутри persistenceContext hashMap entitiesByKey -> хранит сущности по ключу 
+Если в сессии два раза запросим одну и ту же сущность то выполнится один запрос к базе
+При session.close кеш очищается.
+Любое изменение сущности связанное с persistenceContext отразится на базе данных.
+Понятие dirty session
