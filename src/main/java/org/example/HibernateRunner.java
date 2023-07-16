@@ -23,20 +23,23 @@ public class HibernateRunner {
              Session session = sessionFactory.openSession()) {
             session.beginTransaction();
 
-            var user = User.builder()
-                    .username("ivan1@gmail.com")
-                    .firstname("Ivan")
-                    .lastname("Ivanov")
-                    .info("""
-                            {
-                            "name": "Ivan",
-                            "id": 25
-                            }
-                            """)
-                    .birthDate(new Birthday(LocalDate.of(2000, 1, 19)))
-                    .role(Role.ADMIN)
-                    .build();
-            session.save(user);
+//            var user = User.builder()
+//                    .username("ivan9@gmail.com")
+//                    .firstname("Ivan")
+//                    .lastname("Ivanov")
+//                    .info("""
+//                            {
+//                            "name": "Ivan",
+//                            "id": 25
+//                            }
+//                            """)
+//                    .birthDate(new Birthday(LocalDate.of(2000, 1, 19)))
+//                    .role(Role.ADMIN)
+//                    .build();
+//            session.save(user);
+//            session.saveOrUpdate(user);
+//            session.delete(user);
+            User user = session.get(User.class, "ivan@gmail.com");
 
             session.getTransaction().commit();
         }
