@@ -53,3 +53,8 @@ session.merge(entity) -> сохр. измененное состояние entit
 > Hibernate (ORM framefork) - одна за самых распространенных JPA реализаций.
 
 См. find <-> get  OR save <-> persist
+
+---
+Логирование
+
+slf4j -> binding -> log4j OR jdk14l OR simple
