@@ -58,3 +58,9 @@ session.merge(entity) -> сохр. измененное состояние entit
 Логирование
 
 slf4j -> binding -> log4j OR jdk14l OR simple
+
+Паттерн вывода
+https://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/PatternLayout.html
+
+Log levels:
+FATAL <- ERROR <- WARN <- INFO <- DEBUG <- TRACE
