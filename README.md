@@ -37,3 +37,8 @@ field persistenceContext into session -> first level cache for each session
 
 Entity lifecycle: transient, persistent, detached, removed.
 Отложенное выполнение запросов в Hibernate. Метод flush()
+
+-----------------------------------------------
+
+session.refresh(entity) -> синх. состояние entity с базой данных (поместить в persistenceContext если entity не было)
+session.merge(entity) -> сохр. измененное состояние entity в базу данных (поместить в persistenceContext если entity не было)
