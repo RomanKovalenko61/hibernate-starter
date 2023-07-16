@@ -32,3 +32,8 @@ field persistenceContext into session -> first level cache for each session
 При session.close кеш очищается.
 Любое изменение сущности связанное с persistenceContext отразится на базе данных.
 Понятие dirty session
+
+---------------------------------------------
+
+Entity lifecycle: transient, persistent, detached, removed.
+Отложенное выполнение запросов в Hibernate. Метод flush()
