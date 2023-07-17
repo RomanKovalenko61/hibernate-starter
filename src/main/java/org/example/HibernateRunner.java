@@ -35,8 +35,9 @@ public class HibernateRunner {
             try (session1) {
                 Transaction transaction = session1.beginTransaction();
 
-                session1.saveOrUpdate(company);
-                session1.saveOrUpdate(user);
+                User user1 = session1.get(User.class, 1L);
+//                session1.saveOrUpdate(company);
+//                session1.saveOrUpdate(user);
 
                 session1.getTransaction().commit();
             }

@@ -91,3 +91,8 @@ DATE -> localDate
 TIME -> localTime
 
 @ColumnTransformers, @Formula
+
+---
+
+@ManyToOne(optional = false, fetch = FetchType.LAZY)
+В зависимости от optional выполнится outer/inner join
