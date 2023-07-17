@@ -7,7 +7,7 @@ CREATE TABLE users
     username   VARCHAR(128) UNIQUE,
     role       VARCHAR(32),
     info       JSONB,
-    company_id INT REFERENCES company(id)
+    company_id INT REFERENCES company(id) ON DELETE CASCADE
 );
 
 CREATE TABLE company

@@ -3,7 +3,8 @@ package org.example.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -23,7 +24,12 @@ public class Company {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "company")
-//    @JoinColumn(name = "company_id")
-    private List<User> users;
+    @Builder.Default
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+    private Set<User> users = new HashSet<>();
+
+    public void addUser(User user) {
+        users.add(user);
+        user.setCompany(this);
+    }
 }
