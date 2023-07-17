@@ -76,3 +76,18 @@ Embedded components -> class ComponentType
 В persistent сущности должен быть id
 Разное поведение hibernate когда таблица сама генерирует id или когда мы управляем sequence
 См. дебаг
+
+---
+
+@Access(AccessType.FIELD) - по умолчанию
+@Access(AccessType.PROPERTY) -> устарел, аннотации над геттерами
+
+@Transient - не сериализовать поле
+
+@Temporal(TemporalType.TIMESTAMP)
+private Date date;
+TIMESTAMP -> localDateTime
+DATE -> localDate
+TIME -> localTime
+
+@ColumnTransformers, @Formula
