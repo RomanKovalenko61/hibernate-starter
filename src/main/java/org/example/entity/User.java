@@ -20,7 +20,15 @@ import javax.persistence.*;
 public class User {
 
     @Id
-    @Column(name = "username")
+    @GeneratedValue(generator = "user_gen", strategy = GenerationType.IDENTITY)
+//    @SequenceGenerator(name = "user_gen", sequenceName = "users_id_seq", allocationSize = 1)
+//    @TableGenerator(name = "user_gen", table = "all_sequence",
+//            pkColumnName = "table_name",
+//            valueColumnName = "pk_value",
+//            allocationSize = 1)
+    private Long id;
+
+    @Column(name = "username", unique = true)
     private String username;
 
     @Embedded

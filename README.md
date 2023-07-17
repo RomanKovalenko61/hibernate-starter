@@ -70,3 +70,9 @@ FATAL <- ERROR <- WARN <- INFO <- DEBUG <- TRACE
 Embedded components -> class ComponentType
 
 Составные первичные ключи
+
+---
+
+В persistent сущности должен быть id
+Разное поведение hibernate когда таблица сама генерирует id или когда мы управляем sequence
+См. дебаг
