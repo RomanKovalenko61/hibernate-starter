@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.converter.BirthdayConverter;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
@@ -24,17 +23,11 @@ public class User {
     @Column(name = "username")
     private String username;
 
-    @Column(name = "firstname")
-    private String firstname;
+    @Embedded
+    @AttributeOverride(name = "birthDate", column = @Column(name = "birth_date"))
+    private PersonalInfo personalInfo;
 
-    @Column(name = "lastname")
-    private String lastname;
-
-    @Convert(converter = BirthdayConverter.class)
-    @Column(name = "birth_date")
-    private Birthday birthDate;
-
-//    @Type(type = "jsonb")
+    //    @Type(type = "jsonb")
     @Type(type = "shortName")
     private String info;
 

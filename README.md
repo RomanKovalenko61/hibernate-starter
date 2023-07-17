@@ -64,3 +64,9 @@ https://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/PatternLayout.html
 
 Log levels:
 FATAL <- ERROR <- WARN <- INFO <- DEBUG <- TRACE
+
+---
+
+Embedded components -> class ComponentType
+
+Составные первичные ключи
