@@ -9,8 +9,8 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(of = "name")
 @ToString(exclude = "users")
-@EqualsAndHashCode(exclude = "users")
 @Builder
 @Entity()
 @Table(name = "company", schema = "public")
@@ -21,7 +21,7 @@ public class Company {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
     @Builder.Default
