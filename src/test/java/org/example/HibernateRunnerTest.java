@@ -4,7 +4,6 @@ import lombok.Cleanup;
 import org.example.entity.Company;
 import org.example.entity.User;
 import org.example.util.HibernateUtil;
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Test;
@@ -18,11 +17,41 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Set;
 
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.joining;
 
 class HibernateRunnerTest {
+
+    @Test
+    void checkLazyInitialization() {
+        Company company = null;
+        try (var factory = HibernateUtil.buildSessionFactory();
+             var session = factory.openSession()) {
+            session.beginTransaction();
+
+//            company = session.get(Company.class, 2);
+            company = session.getReference(Company.class, 2); //get HibernateProxy
+
+            session.getTransaction().commit();
+        }
+        Set<User> users = company.getUsers();
+        System.out.println(users.size());
+    }
+
+    @Test
+    void getCompanyById() {
+        @Cleanup SessionFactory factory = HibernateUtil.buildSessionFactory();
+        @Cleanup Session session = factory.openSession();
+        session.beginTransaction();
+
+        Company company = session.get(Company.class, 1);
+//        Hibernate.initialize(company.getUsers());
+        System.out.println();
+
+        session.getTransaction().commit();
+    }
 
     @Test
     void deleteCompany() {
@@ -55,19 +84,6 @@ class HibernateRunnerTest {
 
         session.save(company);
 
-
-        session.getTransaction().commit();
-    }
-
-    @Test
-    void oneToMany() {
-        @Cleanup SessionFactory factory = HibernateUtil.buildSessionFactory();
-        @Cleanup Session session = factory.openSession();
-        session.beginTransaction();
-
-        Company company = session.get(Company.class, 1);
-//        Hibernate.initialize(company.getUsers());
-        System.out.println();
 
         session.getTransaction().commit();
     }

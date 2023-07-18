@@ -100,3 +100,8 @@ TIME -> localTime
 ---
 
 CollectionType into Hibernate (для работы с OneToMany)
+
+---
+
+интерфейс LazyInitializer
+(почитать) Закрытие сессии на уровне сервисов
