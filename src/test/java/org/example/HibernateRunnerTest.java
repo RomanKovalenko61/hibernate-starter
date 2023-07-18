@@ -4,6 +4,7 @@ import lombok.Cleanup;
 import org.example.entity.Company;
 import org.example.entity.User;
 import org.example.util.HibernateUtil;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Test;
@@ -65,6 +66,7 @@ class HibernateRunnerTest {
         session.beginTransaction();
 
         Company company = session.get(Company.class, 1);
+//        Hibernate.initialize(company.getUsers());
         System.out.println();
 
         session.getTransaction().commit();

@@ -96,3 +96,7 @@ TIME -> localTime
 
 @ManyToOne(optional = false, fetch = FetchType.LAZY)
 В зависимости от optional выполнится outer/inner join
+
+---
+
+CollectionType into Hibernate (для работы с OneToMany)
