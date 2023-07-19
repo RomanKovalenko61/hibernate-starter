@@ -1,13 +1,13 @@
 CREATE TABLE users
 (
-    id BIGSERIAL PRIMARY KEY ,
+    id         BIGSERIAL PRIMARY KEY,
     firstname  VARCHAR(128),
     lastname   VARCHAR(128),
     birth_date DATE,
     username   VARCHAR(128) UNIQUE,
     role       VARCHAR(32),
     info       JSONB,
-    company_id INT REFERENCES company(id) ON DELETE CASCADE
+    company_id INT REFERENCES company (id) ON DELETE CASCADE
 );
 
 CREATE TABLE company
@@ -18,10 +18,13 @@ CREATE TABLE company
 
 CREATE TABLE profile
 (
-  user_id BIGINT PRIMARY KEY REFERENCES users(id),
-  street VARCHAR(128),
-  language CHAR(2)
+    id       BIGSERIAL PRIMARY KEY,
+    user_id  BIGINT NOT NULL UNIQUE REFERENCES users (id),
+    street   VARCHAR(128),
+    language CHAR(2)
 );
+
+DROP TABLE profile;
 
 -- CREATE SEQUENCE users_id_seq OWNED BY public.users.id;
 
