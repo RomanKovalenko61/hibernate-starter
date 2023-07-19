@@ -1,8 +1,10 @@
 package org.example;
 
 import lombok.Cleanup;
+import org.example.entity.Chat;
 import org.example.entity.Company;
 import org.example.entity.User;
+import org.example.entity.UserChat;
 import org.example.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,6 +18,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.Set;
 
@@ -31,7 +34,18 @@ class HibernateRunnerTest {
             session.beginTransaction();
 
             var user = session.get(User.class, 4L);
-            user.getChats().clear();
+            var chat = session.get(Chat.class, 1L);
+
+            var userChat = UserChat.builder()
+                    .createdAt(Instant.now())
+                    .createdBy(user.getUsername())
+                    .build();
+            userChat.setUser(user);
+            userChat.setChat(chat);
+
+            session.save(userChat);
+
+//            user.getChats().clear();
 
 //            var chat = Chat.builder()
 //                    .name("chatik")

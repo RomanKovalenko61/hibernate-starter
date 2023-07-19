@@ -105,3 +105,7 @@ CollectionType into Hibernate (для работы с OneToMany)
 
 интерфейс LazyInitializer
 (почитать) Закрытие сессии на уровне сервисов
+
+---
+
+чтобы заменить LEFT OUTER JOIN на INNER JOIN нужно добавить @ManyToOne(optional=false)

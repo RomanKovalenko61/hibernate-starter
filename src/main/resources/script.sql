@@ -26,10 +26,14 @@ CREATE TABLE profile
 
 CREATE TABLE users_chat
 (
-    user_id BIGINT REFERENCES users (id),
-    chat_id BIGINT REFERENCES chat (id),
-    PRIMARY KEY (user_id, chat_id)
+    id         BIGSERIAL PRIMARY KEY,
+    user_id    BIGINT REFERENCES users (id),
+    chat_id    BIGINT REFERENCES chat (id),
+    created_at TIMESTAMP    NOT NULL,
+    created_by VARCHAR(128) NOT NULL
 );
+
+DROP TABLE users_chat;
 
 CREATE TABLE chat
 (
