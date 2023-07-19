@@ -16,6 +16,13 @@ CREATE TABLE company
     name VARCHAR(64) NOT NULL UNIQUE
 );
 
+CREATE TABLE profile
+(
+  user_id BIGINT PRIMARY KEY REFERENCES users(id),
+  street VARCHAR(128),
+  language CHAR(2)
+);
+
 -- CREATE SEQUENCE users_id_seq OWNED BY public.users.id;
 
 -- DROP SEQUENCE users_id_seq;
