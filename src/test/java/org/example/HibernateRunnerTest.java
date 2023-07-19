@@ -25,6 +25,26 @@ import static java.util.stream.Collectors.joining;
 class HibernateRunnerTest {
 
     @Test
+    void checkManyToMany() {
+        try (var factory = HibernateUtil.buildSessionFactory();
+             var session = factory.openSession()) {
+            session.beginTransaction();
+
+            var user = session.get(User.class, 4L);
+            user.getChats().clear();
+
+//            var chat = Chat.builder()
+//                    .name("chatik")
+//                    .build();
+//            user.addChat(chat);
+//
+//            session.save(chat);
+
+            session.getTransaction().commit();
+        }
+    }
+
+    @Test
     void checkOneToOne() {
         try (var factory = HibernateUtil.buildSessionFactory();
              var session = factory.openSession()) {

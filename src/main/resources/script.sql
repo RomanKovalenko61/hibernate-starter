@@ -24,6 +24,19 @@ CREATE TABLE profile
     language CHAR(2)
 );
 
+CREATE TABLE users_chat
+(
+    user_id BIGINT REFERENCES users (id),
+    chat_id BIGINT REFERENCES chat (id),
+    PRIMARY KEY (user_id, chat_id)
+);
+
+CREATE TABLE chat
+(
+    id   BIGSERIAL PRIMARY KEY,
+    name VARCHAR(64) NOT NULL UNIQUE
+);
+
 DROP TABLE profile;
 
 -- CREATE SEQUENCE users_id_seq OWNED BY public.users.id;
