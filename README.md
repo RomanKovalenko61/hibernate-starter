@@ -109,3 +109,7 @@ CollectionType into Hibernate (для работы с OneToMany)
 ---
 
 чтобы заменить LEFT OUTER JOIN на INNER JOIN нужно добавить @ManyToOne(optional=false)
+
+---
+
+почитать про PersistentBag List and Collection
