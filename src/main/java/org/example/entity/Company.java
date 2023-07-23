@@ -4,10 +4,9 @@ import lombok.*;
 import org.hibernate.annotations.SortNatural;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 @Data
 @NoArgsConstructor
@@ -31,10 +30,12 @@ public class Company {
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
 //    @org.hibernate.annotations.OrderBy(clause = "username DESC, lastname ASC")
 //    @OrderBy("username DESC, personalInfo.lastname ASC")
-    @OrderColumn(name = "id")
-    @SortNatural
+//    @OrderColumn(name = "id")
+//    @SortNatural
 //    @SortComparator()
-    private Set<User> users = new TreeSet<>();
+    @MapKey(name = "username")
+    @SortNatural
+    private Map<String, User> users = new TreeMap<>();
 
     @Builder.Default
     @ElementCollection()
@@ -42,10 +43,11 @@ public class Company {
 //    @AttributeOverride(name = "lang", column = @Column(name = "language"))
 //    private List<LocaleInfo> locales = new ArrayList<>();
     @Column(name = "description")
-    private List<String> locales = new ArrayList<>();
+    @MapKeyColumn(name = "lang")
+    private Map<String, String> locales = new HashMap();
 
     public void addUser(User user) {
-        users.add(user);
+        users.put(user.getUsername(), user);
         user.setCompany(this);
     }
 }

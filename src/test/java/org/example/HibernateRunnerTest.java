@@ -20,7 +20,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Instant;
 import java.util.Arrays;
-import java.util.Set;
 
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.joining;
@@ -37,7 +36,7 @@ class HibernateRunnerTest {
 //            company.getLocales().add(LocaleInfo.of("ru", "Описание на русском"));
 //            company.getLocales().add(LocaleInfo.of("en", "English description"));
 //            System.out.println(company.getLocales());
-            company.getUsers().forEach(System.out::println);
+            company.getUsers().forEach((k, v) -> System.out.println(v));
 
             session.getTransaction().commit();
         }
@@ -104,7 +103,7 @@ class HibernateRunnerTest {
             session.beginTransaction();
 
             var company = session.get(Company.class, 2);
-            company.getUsers().removeIf(user -> user.getId().equals(5L));
+//            company.getUsers().removeIf(user -> user.getId().equals(5L));
 
             session.getTransaction().commit();
         }
@@ -122,8 +121,8 @@ class HibernateRunnerTest {
 
             session.getTransaction().commit();
         }
-        Set<User> users = company.getUsers();
-        System.out.println(users.size());
+//        Set<User> users = company.getUsers();
+//        System.out.println(users.size());
     }
 
     @Test
