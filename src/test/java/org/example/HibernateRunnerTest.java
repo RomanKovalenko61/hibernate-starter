@@ -27,6 +27,21 @@ import static java.util.stream.Collectors.joining;
 class HibernateRunnerTest {
 
     @Test
+    void checkH2() {
+        try (var factory = HibernateUtil.buildSessionFactory();
+             var session = factory.openSession()) {
+            session.beginTransaction();
+
+            var company = Company.builder()
+                    .name("com in memory")
+                    .build();
+            session.save(company);
+
+            session.getTransaction().commit();
+        }
+    }
+
+    @Test
     void LocaleInfo() {
         try (var factory = HibernateUtil.buildSessionFactory();
              var session = factory.openSession()) {

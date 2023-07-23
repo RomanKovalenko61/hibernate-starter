@@ -113,3 +113,13 @@ CollectionType into Hibernate (для работы с OneToMany)
 ---
 
 почитать про PersistentBag List and Collection
+
+---
+
+почитать https://h2database.github.io/html/features.html#products_work_with 
+почитать про migration frameworks: FlyWay OR Liquibase
+пока используем генератор хибернейта. !Неоходимо перепроверять за ним!
+Стратегии генерации ddl
+<property name="hibernate.hbm2ddl.auto">(create, create-drop, update, validate)</property>
+
+https://9to5answer.com/h2-database-null-not-allowed-for-column-quot-id-quot-when-inserting-record-using-jdbctemplate

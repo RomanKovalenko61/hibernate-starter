@@ -17,7 +17,7 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "users", schema = "public")
-@TypeDef(name = "shortName", typeClass = JsonBinaryType.class)
+//@TypeDef(name = "shortName", typeClass = JsonBinaryType.class)
 public class User implements Comparable<User> {
 
     @Id
@@ -28,12 +28,12 @@ public class User implements Comparable<User> {
     @AttributeOverride(name = "birthDate", column = @Column(name = "birth_date"))
     private PersonalInfo personalInfo;
 
-    @Column(name = "username", unique = true)
+    @Column(name = "username", unique = true, columnDefinition = "")
     private String username;
 
     //    @Type(type = "jsonb")
-    @Type(type = "shortName")
-    private String info;
+//    @Type(type = "shortName")
+//    private String info;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
