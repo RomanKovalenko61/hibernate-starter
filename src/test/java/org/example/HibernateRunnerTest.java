@@ -5,6 +5,7 @@ import org.example.entity.Chat;
 import org.example.entity.Company;
 import org.example.entity.User;
 import org.example.entity.UserChat;
+import org.example.util.HibernateTestUtil;
 import org.example.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -28,7 +29,7 @@ class HibernateRunnerTest {
 
     @Test
     void checkH2() {
-        try (var factory = HibernateUtil.buildSessionFactory();
+        try (var factory = HibernateTestUtil.buildSessionFactory();
              var session = factory.openSession()) {
             session.beginTransaction();
 

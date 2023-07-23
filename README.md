@@ -123,3 +123,7 @@ CollectionType into Hibernate (для работы с OneToMany)
 <property name="hibernate.hbm2ddl.auto">(create, create-drop, update, validate)</property>
 
 https://9to5answer.com/h2-database-null-not-allowed-for-column-quot-id-quot-when-inserting-record-using-jdbctemplate
+
+---
+
+https://java.testcontainers.org/
