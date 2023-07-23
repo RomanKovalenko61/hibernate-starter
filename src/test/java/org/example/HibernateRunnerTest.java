@@ -28,6 +28,21 @@ import static java.util.stream.Collectors.joining;
 class HibernateRunnerTest {
 
     @Test
+    void LocaleInfo() {
+        try (var factory = HibernateUtil.buildSessionFactory();
+             var session = factory.openSession()) {
+            session.beginTransaction();
+
+            var company = session.get(Company.class, 1);
+//            company.getLocales().add(LocaleInfo.of("ru", "Описание на русском"));
+//            company.getLocales().add(LocaleInfo.of("en", "English description"));
+            System.out.println(company.getLocales());
+
+            session.getTransaction().commit();
+        }
+    }
+
+    @Test
     void checkManyToMany() {
         try (var factory = HibernateUtil.buildSessionFactory();
              var session = factory.openSession()) {
@@ -159,7 +174,8 @@ class HibernateRunnerTest {
     }
 
     @Test
-    void checkedGetReflectionApi() throws SQLException, NoSuchMethodException, NoSuchFieldException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    void checkedGetReflectionApi() throws
+            SQLException, NoSuchMethodException, NoSuchFieldException, IllegalAccessException, InvocationTargetException, InstantiationException {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = preparedStatement.executeQuery();
         resultSet.getString("username");

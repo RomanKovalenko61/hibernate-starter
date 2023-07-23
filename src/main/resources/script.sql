@@ -34,14 +34,21 @@ CREATE TABLE users_chat
     UNIQUE (user_id, chat_id)
 );
 
-DROP TABLE users_chat;
-
 CREATE TABLE chat
 (
     id   BIGSERIAL PRIMARY KEY,
     name VARCHAR(64) NOT NULL UNIQUE
 );
 
+CREATE TABLE company_locale
+(
+    company_id  INT          NOT NULL REFERENCES company (id),
+    lang        CHAR(2)      NOT NULL,
+    description VARCHAR(128) NOT NULL,
+    PRIMARY KEY (company_id, lang)
+);
+
+DROP TABLE users_chat;
 DROP TABLE profile;
 
 -- CREATE SEQUENCE users_id_seq OWNED BY public.users.id;
