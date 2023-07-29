@@ -14,14 +14,14 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode(of = "username")
 @ToString(exclude = {"company", "profile", "userChats"})
-@Builder
 @Entity
-@Table(name = "users", schema = "public")
+//@Table(name = "users", schema = "public")
 @TypeDef(name = "shortName", typeClass = JsonBinaryType.class)
-public class User implements Comparable<User>, BaseEntity<Long> {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class User implements Comparable<User>, BaseEntity<Long> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Embedded
@@ -46,11 +46,10 @@ public class User implements Comparable<User>, BaseEntity<Long> {
     @OneToOne(
             mappedBy = "user",
             cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
-            optional = false)
+            fetch = FetchType.LAZY
+    )
     private Profile profile;
 
-    @Builder.Default
     @OneToMany(mappedBy = "user")
     private List<UserChat> userChats = new ArrayList<>();
 

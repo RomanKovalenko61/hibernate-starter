@@ -1,10 +1,7 @@
 package org.example;
 
 import lombok.Cleanup;
-import org.example.entity.Chat;
-import org.example.entity.Company;
-import org.example.entity.User;
-import org.example.entity.UserChat;
+import org.example.entity.*;
 import org.example.util.HibernateTestUtil;
 import org.example.util.HibernateUtil;
 import org.hibernate.Session;
@@ -19,7 +16,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.Instant;
 import java.util.Arrays;
 
 import static java.util.Optional.ofNullable;
@@ -33,10 +29,31 @@ class HibernateRunnerTest {
              var session = factory.openSession()) {
             session.beginTransaction();
 
-            var company = Company.builder()
-                    .name("com in memory")
+            var google = Company.builder()
+                    .name("Google")
                     .build();
-            session.save(company);
+            session.save(google);
+
+            Programmer programmer = Programmer.builder()
+                    .username("ivan@mail.com")
+                    .language(Language.JAVA)
+                    .company(google)
+                    .build();
+            session.save(programmer);
+
+            Manager manager = Manager.builder()
+                    .username("sveta@gmail.com")
+                    .projectName("Starter")
+                    .company(google)
+                    .build();
+            session.save(manager);
+            session.flush();
+
+            session.clear();
+
+            var programmer1 = session.get(Programmer.class, 1L);
+            var manager11 = session.get(User.class, 2L);
+            System.out.println();
 
             session.getTransaction().commit();
         }
@@ -176,12 +193,12 @@ class HibernateRunnerTest {
                 .name("Facebook")
                 .build();
 
-        User user = User.builder()
-                .username("sveta@gmail.com")
-                .build();
+//        User user = User.builder()
+//                .username("sveta@gmail.com")
+//                .build();
 //        user.setCompany(company);
 //        company.getUsers().add(user);
-        company.addUser(user);
+//        company.addUser(user);
 
         session.save(company);
 
@@ -209,7 +226,7 @@ class HibernateRunnerTest {
 
     @Test
     void checkReflectionApi() throws SQLException, IllegalAccessException {
-        User user = User.builder().build();
+        User user = null;
 
         String sql = """
                 insert
