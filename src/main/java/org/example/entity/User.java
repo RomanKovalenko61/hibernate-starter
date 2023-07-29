@@ -17,8 +17,8 @@ import java.util.List;
 @Entity
 @Table(name = "users", schema = "public")
 @TypeDef(name = "shortName", typeClass = JsonBinaryType.class)
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
+@Inheritance(strategy = InheritanceType.JOINED)
+//@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
 public abstract class User implements Comparable<User>, BaseEntity<Long> {
 
     @Id
