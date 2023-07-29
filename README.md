@@ -18,6 +18,13 @@ Intellij Idea кириллица в консоли Что бы исправит�
 
 -----------------------------------
 
+Создание образа postgresql 
+> $ docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -p5433:5432 -d postgres
+>
+> $ docker ps
+
+-----------------------------------
+
 interface EntityPersister -> mapped sql query with ours entity.
 
 1. Evaluate expression: getFactory().getMetamodel()
