@@ -6,9 +6,11 @@ import org.example.util.HibernateTestUtil;
 import org.example.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.annotations.QueryHints;
 import org.junit.jupiter.api.Test;
 
 import javax.persistence.Column;
+import javax.persistence.FlushModeType;
 import javax.persistence.Table;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -32,15 +34,19 @@ class HibernateRunnerTest {
 //            HQL / JPQL
 //            select u.* from users u where u.firstname = 'Ivan'
             String name = "Ivan";
-            var result = session.createQuery(
-                    "select u from User u " +
-                            "left join u.company c " +
-                            "where u.personalInfo.firstname = :firstname and c.name = :companyName " +
-                            "order by u.personalInfo.lastname desc ", User.class)
+            var result = session.createNamedQuery(
+                    "findUserByName", User.class)
 //                    .setParameter(1, name)
                     .setParameter("firstname", name)
                     .setParameter("companyName", "Google")
+                    .setFlushMode(FlushModeType.COMMIT)
+                    .setHint(QueryHints.FETCH_SIZE, "50")
                     .list();
+
+            var countRows = session.createQuery("update User u set u.role = 'ADMIN'")
+                    .executeUpdate();
+
+            session.createNativeQuery("select u.* from users u where u.firstname = 'Ivan'", User.class);
 
             session.getTransaction().commit();
         }

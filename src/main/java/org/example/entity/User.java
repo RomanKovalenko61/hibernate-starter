@@ -9,6 +9,10 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedQuery(name = "findUserByName", query = "select u from User u " +
+        "left join u.company c " +
+        "where u.personalInfo.firstname = :firstname and c.name = :companyName " +
+        "order by u.personalInfo.lastname desc ")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,7 +21,7 @@ import java.util.List;
 @Entity
 @Table(name = "users", schema = "public")
 @TypeDef(name = "shortName", typeClass = JsonBinaryType.class)
-@Inheritance(strategy = InheritanceType.JOINED)
+//@Inheritance(strategy = InheritanceType.JOINED)
 //@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
 public abstract class User implements Comparable<User>, BaseEntity<Long> {
 
