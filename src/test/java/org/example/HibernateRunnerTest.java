@@ -24,6 +24,29 @@ import static java.util.stream.Collectors.joining;
 class HibernateRunnerTest {
 
     @Test
+    void checkHql() {
+        try (var factory = HibernateTestUtil.buildSessionFactory();
+             var session = factory.openSession()) {
+            session.beginTransaction();
+
+//            HQL / JPQL
+//            select u.* from users u where u.firstname = 'Ivan'
+            String name = "Ivan";
+            var result = session.createQuery(
+                    "select u from User u " +
+                            "left join u.company c " +
+                            "where u.personalInfo.firstname = :firstname and c.name = :companyName " +
+                            "order by u.personalInfo.lastname desc ", User.class)
+//                    .setParameter(1, name)
+                    .setParameter("firstname", name)
+                    .setParameter("companyName", "Google")
+                    .list();
+
+            session.getTransaction().commit();
+        }
+    }
+
+    @Test
     void checkH2() {
         try (var factory = HibernateTestUtil.buildSessionFactory();
              var session = factory.openSession()) {
